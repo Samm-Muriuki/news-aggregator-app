@@ -47,7 +47,7 @@ function App() {
                     element={
                       <ThemedLayoutV2
                         Header={() => <Header sticky />}
-                        Sider={(props) => <ThemedSiderV2 {...props} fixed />}
+                        Sider={() => null}
                       >
                         <Outlet />
                       </ThemedLayoutV2>

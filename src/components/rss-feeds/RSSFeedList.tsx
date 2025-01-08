@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { List, Typography, Skeleton } from "antd";
+import { List, Typography, Skeleton, Col, Row } from "antd";
 import { fetchCategoryArticles } from "../../services/api";
 import RSSFeedItem from "./RSSFeedItem";
 
@@ -33,13 +33,13 @@ const RSSFeedList: React.FC<RSSFeedListProps> = ({ category }) => {
     const skeletonData = Array.from({ length: 9 }, (_, index) => ({ key: `skeleton-${index}` }));
 
     return (
-        <div style={{ padding: "24px" }}>
-            <Title level={3}>{category}</Title>
-            <List
-                grid={{ gutter: 16, column: 3 }}
-                dataSource={loading ? skeletonData : articles}
-                renderItem={(item, index) => (
-                    <List.Item key={item.key || `article-${index}`}>
+        <>
+            <Title level={3} style={{ textAlign: "center", marginBottom: "16px" }}>
+                {category}
+            </Title>
+            <Row gutter={[16, 16]}>
+                {(loading ? skeletonData : articles).map((item, index) => (
+                    <Col xs={24} sm={12} md={12} lg={8} xl={6} key={item.key || `article-${index}`}>
                         {loading ? (
                             <Skeleton
                                 active
@@ -55,10 +55,10 @@ const RSSFeedList: React.FC<RSSFeedListProps> = ({ category }) => {
                                 publishedAt={item.publishedAt}
                             />
                         )}
-                    </List.Item>
-                )}
-            />
-        </div>
+                    </Col>
+                ))}
+            </Row>
+        </>
     );
 };
 
