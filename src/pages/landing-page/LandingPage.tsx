@@ -5,14 +5,11 @@ import RSSFeedList from "../../components/rss-feeds/RSSFeedList";
 
 const LandingPage: React.FC = () => {
     const { category } = useParams<{ category?: string }>();
-    console.log("category: ", category);
-    
+    // console.log("category: ", category);
+
 
     return (
-        <div>
-            <Navbar />
-            <RSSFeedList category={category || "Main Headlines"} />
-        </div>
+        <RSSFeedList category={category || "Main Headlines"} />
     );
 };
 

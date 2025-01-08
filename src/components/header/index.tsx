@@ -1,5 +1,5 @@
 import type { RefineThemedLayoutV2HeaderProps } from "@refinedev/antd";
-import { useGetIdentity } from "@refinedev/core";
+import { Link, useGetIdentity } from "@refinedev/core";
 import {
   Avatar,
   Layout as AntdLayout,
@@ -7,6 +7,7 @@ import {
   Switch,
   theme,
   Typography,
+  Menu,
 } from "antd";
 import React, { useContext } from "react";
 import { ColorModeContext } from "../../contexts/color-mode";
@@ -30,10 +31,15 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   const headerStyles: React.CSSProperties = {
     backgroundColor: token.colorBgElevated,
     display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
+    // flexDirection: "column", // Allow vertical stacking
     padding: "0px 24px",
-    height: "64px",
+    // width: "100%",
+  };
+
+  const menuStyles: React.CSSProperties = {
+    width: "100%",
+    marginRight: "8px",
+    borderRadius: "10px",
   };
 
   if (sticky) {
@@ -42,9 +48,29 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
     headerStyles.zIndex = 1;
   }
 
+  const categories = [
+    "Main Headlines",
+    "Kenya News",
+    "World News",
+    "Politics",
+    "Sports",
+    "Business",
+    "Eve Woman",
+    "Magazines",
+    "Agriculture",
+  ];
+
   return (
     <AntdLayout.Header style={headerStyles}>
-      <Space>
+      <Menu mode="horizontal" style={menuStyles}>
+        {categories.map((category) => (
+          <Menu.Item key={category}>
+            <Link to={`/rss-feeds/${encodeURIComponent(category)}`}>{category}</Link>
+          </Menu.Item>
+        ))}
+      </Menu>
+
+      <Space style={{ justifyContent: "space-between", alignItems: "center" }}>
         <Switch
           checkedChildren="🌛"
           unCheckedChildren="🔆"

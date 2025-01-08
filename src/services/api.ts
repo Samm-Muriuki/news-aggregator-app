@@ -44,11 +44,11 @@ const fetchRSSFeed = async (url: string): Promise<Article[]> => {
         
         return items.map((item: any, index) => {
             const mediaContent = item.getElementsByTagName("media:content")[0];
-            console.log("mediaContent via getElementsByTagName: ", mediaContent);
+            // console.log("mediaContent via getElementsByTagName: ", mediaContent);
 
             // Extract the URL from the media:content tag
             const imgSrc = mediaContent?.getAttribute("url") || newsImage; // Use default image if no URL found
-            console.log(`Item ${index + 1} imgSrc:`, imgSrc);
+            // console.log(`Item ${index + 1} imgSrc:`, imgSrc);
 
             return {
                 title: item.querySelector("title")?.textContent || "No title",
