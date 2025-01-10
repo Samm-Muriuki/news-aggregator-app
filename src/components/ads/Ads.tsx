@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Modal, Button, Card, Affix } from "antd";
 import { useLocation } from "react-router-dom";
+import AdPlaceholders from "./AdPlaceholders";
 
 // Popup Ad Component
 const PopupAd = ({ visible, onClose }: any) => (
@@ -11,23 +12,87 @@ const PopupAd = ({ visible, onClose }: any) => (
         centered
         style={{ textAlign: "center" }}
     >
-        <h3>Popup Ad Placeholder</h3>
-        <p>This is a test ad displayed as a popup.</p>
-        <Button type="primary" onClick={onClose}>
-            Close Ad
-        </Button>
+        <div style={{ textAlign: "center", cursor: "pointer" }}>
+            <h3>Airtime 4 Insurance</h3>
+            <p>
+                Purchase airtime using <strong>Buy Goods</strong> Till <strong>181818</strong> & get a complimentary insurance cover
+            </p>
+            <Button
+                type="primary"
+                size="large"
+                style={{ marginTop: 16, borderRadius: 20 }}
+                onClick={() => window.open("https://airtime4insurance.com/", "_blank")}
+            >
+                Click Here to Learn More
+            </Button>
+        </div>
     </Modal>
 );
+
 
 // Static Overlay Ad Component
 const StaticOverlayAd = () => (
     <Affix offsetBottom={10}>
-        <Card style={{ width: 300, position: "fixed", bottom: 120, left: 20, zIndex: 1000 }}>
-            <h3>Static Overlay Ad</h3>
-            <p>Ad content goes here.</p>
+        <Card
+            style={{
+                width: 180,
+                position: "fixed",
+                bottom: 120,
+                left: 20,
+                zIndex: 1000,
+                backgroundColor: "rgba(255, 255, 255, 0)", // Semi-transparent white
+                backdropFilter: "blur(5px)", // Blur effect for glassy look
+                borderRadius: 12,
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                textAlign: "center",
+                backgroundImage: "url('/gift.png')",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+            }}
+        >
+            <h3
+                style={{
+                    marginBottom: 8,
+                    color: "#fff",
+                    textShadow: "0 1px 3px rgba(0, 0, 255, 0.9)",
+                }}
+            >
+                Airtime Purchase{" "}
+                <span
+                    style={{
+                        fontWeight: "bold",
+                        color: "#00FF00",
+                        fontSize: "1.2em",
+                        textShadow: "0 2px 5px rgba(255, 215, 0, 0.2)",
+                    }}
+                >
+                    Buy Goods
+                </span>{" "}
+                <span
+                    style={{
+                        fontWeight: "bold",
+                        color: "#FFD700",
+                        fontSize: "1.2em",
+                        textShadow: "0 2px 5px rgba(255, 215, 0, 0.7)",
+                    }}
+                >
+                    171717
+                </span>{" "}
+                has{" "}
+                <span
+                    style={{
+                        color: "#fff",
+                        textShadow: "0 1px 3px rgba(0, 0, 255, 0.9)",
+                    }}
+                >
+                    Surprise Rewards
+                </span>
+            </h3>
         </Card>
     </Affix>
 );
+
 
 // Transition Ad Component
 const TransitionAd = () => {
@@ -37,9 +102,9 @@ const TransitionAd = () => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
             if (scrollY > 1500 && scrollY < 2500) {
-              setShowAd(true); // Show ad between 1500px and 2500px scroll
+                setShowAd(true); // Show ad between 1500px and 2500px scroll
             } else {
-              setShowAd(false); // Hide ad when not in this range
+                setShowAd(false);
             }
         };
 
@@ -49,10 +114,9 @@ const TransitionAd = () => {
 
     return (
         showAd && (
-            <Card style={{ position: "fixed", top: 80, right: 20, width: 300, zIndex: 1000 }}>
-                <h3>Transition Ad</h3>
-                <p>Ad content triggered on scroll.</p>
-            </Card>
+            <div style={{ position: "fixed", top: 80, right: 20, width: 300, zIndex: 1000 }}>
+                <AdPlaceholders />
+            </div>
         )
     );
 };
@@ -71,19 +135,19 @@ const PreRedirectAd = ({ onProceed }: any) => (
 const AdComponents = () => {
     const [isPopupVisible, setPopupVisible] = useState(false);
     const location = useLocation();
-    const timerRef = useRef<NodeJS.Timeout | null>(null); // Use ref to store the timer ID
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         const startPopupTimer = () => {
-            if (timerRef.current) clearTimeout(timerRef.current); // Clear any existing timer
+            if (timerRef.current) clearTimeout(timerRef.current);
             timerRef.current = setTimeout(() => {
-                setPopupVisible(true); // Show popup after 2 minutes
-            }, 120000);
+                setPopupVisible(true); // Show popup after 1 minute
+            }, 60000);
         };
 
         const resetTimer = () => {
-            setPopupVisible(false); // Hide popup on interaction
-            startPopupTimer(); // Restart the timer
+            setPopupVisible(false);
+            startPopupTimer();
         };
 
         // Start timer on mount

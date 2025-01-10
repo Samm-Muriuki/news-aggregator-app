@@ -11,7 +11,6 @@ const FooterAd = () => {
             setCollapsed(false);
         }, 10000); // 5 seconds delay before ad opens
 
-        // Close the ad after it's opened, and wait 15 seconds before reopening
         const closeTimer = setTimeout(() => {
             setCollapsed(true);
         }, 120000); // 2 minutes after opening before closing
@@ -19,7 +18,7 @@ const FooterAd = () => {
         return () => {
             clearTimeout(openTimer);
             clearTimeout(closeTimer);
-        }; // Cleanup on component unmount
+        };
     }, [collapsed]); // Dependency on collapsed state to repeat the process
 
     const toggleCollapse = () => {
@@ -49,9 +48,10 @@ const FooterAd = () => {
                 }}
                 style={{
                     margin: 0,
-                    maxHeight: collapsed ? "0" : "300px", // Set maxHeight for smooth animation
-                    overflow: "hidden", // Hide overflow during animation
-                    transition: "max-height 6s ease-in-out", // Transition for smooth opening/closing
+                    maxHeight: collapsed ? "0" : "300px",
+                    overflow: "hidden",
+                    transition: "max-height 6s ease-in-out",
+                    cursor: "pointer",
                 }}
             >
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -61,20 +61,16 @@ const FooterAd = () => {
                         style={{ marginRight: 10 }}
                     />
                     <div>
-                        <h3 style={{ margin: 0 }}>J. Mwangi in despair</h3>
-                        <p style={{ margin: 0 }}>Airtime 4 Insurance</p>
+                        <h3 style={{ margin: 0 }}>Purchase airtime using Buy Goods Till 171717 and get a surprise reward</h3>
                     </div>
                 </div>
-                <Button type="primary" style={{ borderRadius: 20 }}>
-                    Open
-                </Button>
             </Card>
             {/* Collapse Arrow */}
             <div
                 style={{
                     position: "absolute",
-                    top: -20, // Adjust to place the arrow above the ad
-                    left: 10, // Adjust to place the arrow on the left
+                    top: -20,
+                    left: 10,
                     backgroundColor: "#fff",
                     border: "1px solid #d9d9d9",
                     borderRadius: "30%",

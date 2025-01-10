@@ -22,8 +22,13 @@ import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import LandingPage from "./pages/landing-page/LandingPage";
 import AdComponents from "./components/ads/Ads";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    document.title = "Gazeti News";
+  }, []);
+  
   return (
     <BrowserRouter>
       <RefineKbarProvider>

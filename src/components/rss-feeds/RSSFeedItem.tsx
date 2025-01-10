@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Modal, Button } from "antd";
+import AdPlaceholders from "../ads/AdPlaceholders";
 
 interface RSSFeedItemProps {
     title: string;
@@ -23,8 +24,7 @@ const RSSFeedItem: React.FC<RSSFeedItemProps> = ({
     };
 
     const proceedToExternal = () => {
-        setShowAd(false); // Close the ad modal
-        window.open(url, "_blank", "noopener,noreferrer"); // Navigate to the external URL
+        window.open(url, "_blank", "noopener,noreferrer");
     };
 
     return (
@@ -55,14 +55,40 @@ const RSSFeedItem: React.FC<RSSFeedItemProps> = ({
                 footer={null}
                 onCancel={() => setShowAd(false)}
                 centered
+                width={"80%"}
+                style={{
+                    textAlign: "center",
+                }}
             >
-                <div style={{ textAlign: "center" }}>
-                    <h3>Sponsored Content</h3>
-                    <p>Your ad content here...</p>
-                    <Button type="primary" onClick={proceedToExternal}>
+                <Card
+                    style={{
+                        backgroundImage: "url('/surprise.png')",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        width: "100%",
+                        height: "auto",
+                        minHeight: "200px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "12px",
+                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                    }}
+                >
+                    <Button
+                        type="primary"
+                        onClick={proceedToExternal}
+                        style={{
+                            position: "absolute",
+                            bottom: "-30px",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            borderRadius: "20px",
+                        }}
+                    >
                         Continue to Article
                     </Button>
-                </div>
+                </Card>
             </Modal>
         </>
     );
