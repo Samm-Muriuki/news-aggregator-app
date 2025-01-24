@@ -69,7 +69,8 @@ const RSS_FEEDS: Record<string, string> = {
 const fetchRSSFeed = async (url: string): Promise<Article[]> => {
     try {
         // Construct API URL for rss2json
-        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+        const apiKey = '8940q5g9c2jokdax107eqbbxnwqb8ltk49gg3nio';
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&count=500&api_key=${apiKey}`;
 
         // Fetch the parsed JSON from rss2json
         const response = await axios.get(apiUrl);
