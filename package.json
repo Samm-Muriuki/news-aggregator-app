@@ -14,6 +14,8 @@
     "@refinedev/simple-rest": "^5.0.1",
     "@uiw/react-md-editor": "^3.19.5",
     "antd": "^5.17.0",
+    "axios": "^1.7.9",
+    "express": "^4.21.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router": "^7.0.2",
@@ -35,8 +37,9 @@
   "scripts": {
     "dev": "refine dev",
     "build": "tsc && refine build",
-    "start": "refine start",
-    "refine": "refine"
+    "start": "node dist/image-proxy.js",
+    "refine": "refine",
+    "proxy-dev": "ts-node src/image-proxy.js"
   },
   "browserslist": {
     "production": [

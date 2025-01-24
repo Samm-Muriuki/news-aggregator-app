@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Navbar: React.FC = () => {
     const categories = [
         "Main Headlines",
+        "Nation",
         "Kenya News",
         "World News",
         "Politics",

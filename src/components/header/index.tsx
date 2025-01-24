@@ -50,6 +50,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
 
   const categories = [
     "Main Headlines",
+    "Nation",
     "Kenya News",
     "World News",
     "Politics",
