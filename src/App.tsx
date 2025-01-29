@@ -23,64 +23,64 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import LandingPage from "./pages/landing-page/LandingPage";
 import AdComponents from "./components/ads/Ads";
 import { useEffect } from "react";
+import usePageTracking from "./pages/google-analytics/usePageTracking";
 
 function App() {
+  usePageTracking();
   useEffect(() => {
     document.title = "Gazeti News";
   }, []);
-  
+
   return (
-    <BrowserRouter>
-      <RefineKbarProvider>
-        <ColorModeContextProvider>
-          <AntdApp>
-            {/* <DevtoolsProvider> */}
-              <Refine
-                dataProvider={dataProvider("https://www.standardmedia.co.ke/rss")}
-                notificationProvider={useNotificationProvider}
-                routerProvider={routerBindings}
-                resources={[]}
-                options={{
-                  syncWithLocation: true,
-                  warnWhenUnsavedChanges: true,
-                  useNewQueryKeys: true,
-                  projectId: "hruyUA-PNrke3-1w8ugX",
-                  title: { text: "Gazeti News", icon: <AppIcon /> },
-                }}
-              >
-                <Routes>
-                  <Route
-                    element={
-                      <ThemedLayoutV2
-                        Header={() => <Header sticky />}
-                        Sider={() => null}
-                      >
-                        <Outlet />
-                        <AdComponents />
-                        {/* <BackTop /> */}
-                      </ThemedLayoutV2>
-                    }
+    <RefineKbarProvider>
+      <ColorModeContextProvider>
+        <AntdApp>
+          {/* <DevtoolsProvider> */}
+          <Refine
+            dataProvider={dataProvider("https://www.standardmedia.co.ke/rss")}
+            notificationProvider={useNotificationProvider}
+            routerProvider={routerBindings}
+            resources={[]}
+            options={{
+              syncWithLocation: true,
+              warnWhenUnsavedChanges: true,
+              useNewQueryKeys: true,
+              projectId: "hruyUA-PNrke3-1w8ugX",
+              title: { text: "Gazeti News", icon: <AppIcon /> },
+            }}
+          >
+            <Routes>
+              <Route
+                element={
+                  <ThemedLayoutV2
+                    Header={() => <Header sticky />}
+                    Sider={() => null}
                   >
+                    <Outlet />
+                    <AdComponents />
+                    {/* <BackTop /> */}
+                  </ThemedLayoutV2>
+                }
+              >
 
 
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/rss-feeds/:category" element={<LandingPage />} />
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/rss-feeds/:category" element={<LandingPage />} />
 
 
-                    <Route path="*" element={<ErrorComponent />} />
-                  </Route>
-                </Routes>
+                <Route path="*" element={<ErrorComponent />} />
+              </Route>
+            </Routes>
 
-                <RefineKbar />
-                <UnsavedChangesNotifier />
-                <DocumentTitleHandler />
-              </Refine>
-              {/* <DevtoolsPanel /> */}
-            {/* </DevtoolsProvider> */}
-          </AntdApp>
-        </ColorModeContextProvider>
-      </RefineKbarProvider>
-    </BrowserRouter>
+            <RefineKbar />
+            <UnsavedChangesNotifier />
+            <DocumentTitleHandler />
+          </Refine>
+          {/* <DevtoolsPanel /> */}
+          {/* </DevtoolsProvider> */}
+        </AntdApp>
+      </ColorModeContextProvider>
+    </RefineKbarProvider>
   );
 }
 
