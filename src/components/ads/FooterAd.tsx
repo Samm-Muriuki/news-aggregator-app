@@ -1,28 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button } from "antd";
+import { Card } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { trackEvent } from "../../analytics";
 
 const FooterAd = () => {
     const [collapsed, setCollapsed] = useState(true);
 
-    // Use effect to simulate delayed opening and closing of the ad
     useEffect(() => {
         const openTimer = setTimeout(() => {
             setCollapsed(false);
-        }, 10000); // 5 seconds delay before ad opens
+            trackEvent("Ad Interaction", "Ad Auto-Opened", "FooterAd"); // Track auto-open event
+        }, 10000); // 10 seconds delay before ad opens
 
         const closeTimer = setTimeout(() => {
             setCollapsed(true);
+            trackEvent("Ad Interaction", "Ad Auto-Closed", "FooterAd"); // Track auto-close event
         }, 120000); // 2 minutes after opening before closing
 
         return () => {
             clearTimeout(openTimer);
             clearTimeout(closeTimer);
         };
-    }, [collapsed]); // Dependency on collapsed state to repeat the process
+    }, [collapsed]); // Runs when `collapsed` changes
 
     const toggleCollapse = () => {
         setCollapsed(!collapsed);
+        trackEvent("Ad Interaction", collapsed ? "Ad Expanded" : "Ad Collapsed", "FooterAd");
+    };
+
+    const handleAdClick = () => {
+        trackEvent("Ad Interaction", "Clicked Footer Ad", "FooterAd");
     };
 
     return (
@@ -37,7 +44,6 @@ const FooterAd = () => {
                 borderTop: "1px solid #d9d9d9",
             }}
         >
-
             {/* Ad Content */}
             <Card
                 bodyStyle={{
@@ -50,13 +56,14 @@ const FooterAd = () => {
                     margin: 0,
                     maxHeight: collapsed ? "0" : "300px",
                     overflow: "hidden",
-                    transition: "max-height 6s ease-in-out",
+                    transition: "max-height 0.6s ease-in-out",
                     cursor: "pointer",
                 }}
+                onClick={handleAdClick} // Track ad clicks
             >
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <img
-                        src="https://via..com/60"
+                        src="https://via.placeholder.com/60"
                         alt="Ad"
                         style={{ marginRight: 10 }}
                     />
@@ -65,6 +72,7 @@ const FooterAd = () => {
                     </div>
                 </div>
             </Card>
+
             {/* Collapse Arrow */}
             <div
                 style={{

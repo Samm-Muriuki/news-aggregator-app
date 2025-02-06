@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Modal, Button } from "antd";
 import AdPlaceholders from "../ads/AdPlaceholders";
+import { trackEvent } from "../../analytics";
 
 interface RSSFeedItemProps {
     title: string;
@@ -20,10 +21,12 @@ const RSSFeedItem: React.FC<RSSFeedItemProps> = ({
     const [showAd, setShowAd] = useState(false);
 
     const handleRedirect = () => {
+        trackEvent("Article Click", "Clicked Article", title);
         setShowAd(true); // Show the ad modal
     };
 
     const proceedToExternal = () => {
+        trackEvent("Article Click", "Proceeded to External Link", title);
         window.open(url, "_blank", "noopener,noreferrer");
     };
 

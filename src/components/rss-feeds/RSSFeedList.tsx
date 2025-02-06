@@ -3,6 +3,7 @@ import { List, Typography, Skeleton, Col, Row } from "antd";
 import { fetchCategoryArticles } from "../../services/api";
 import RSSFeedItem from "./RSSFeedItem";
 import FooterAd from "../ads/FooterAd";
+import { trackEvent } from "../../analytics";
 
 const { Title } = Typography;
 
@@ -35,7 +36,11 @@ const RSSFeedList: React.FC<RSSFeedListProps> = ({ category }) => {
 
     return (
         <>
-            <Title level={3} style={{ textAlign: "center", marginBottom: "16px" }}>
+            <Title
+                level={3}
+                style={{ textAlign: "center", marginBottom: "16px", cursor: "pointer" }}
+                onClick={() => trackEvent("User Interaction", "Clicked Category Heading", category)}
+            >
                 {category}
             </Title>
             <Row gutter={[16, 16]}>

@@ -24,9 +24,16 @@ import LandingPage from "./pages/landing-page/LandingPage";
 import AdComponents from "./components/ads/Ads";
 import { useEffect } from "react";
 import usePageTracking from "./pages/google-analytics/usePageTracking";
+import { initGA, trackScrollDepth } from "./analytics";
 
 function App() {
   usePageTracking();
+  
+  useEffect(() => {
+    initGA();
+    trackScrollDepth();
+  }, []);
+  
   useEffect(() => {
     document.title = "Gazeti News";
   }, []);
