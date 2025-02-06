@@ -21,7 +21,7 @@ const RSS_FEEDS: Record<string, string> = {
     "Sports": "https://www.standardmedia.co.ke/rss/sports.php",
     "Business": "https://www.standardmedia.co.ke/rss/business.php",
     "Columnists": "https://www.standardmedia.co.ke/rss/columnists.php",
-    "Magazines/Pullouts": "https://www.standardmedia.co.ke/rss/magazines.php",
+    "Magazines": "https://www.standardmedia.co.ke/rss/magazines.php",
     "Agriculture": "https://www.standardmedia.co.ke/rss/agriculture.php",
     "KTN Videos": "https://www.standardmedia.co.ke/rss/ktnvideos.php",
     "Eve Woman": "https://www.standardmedia.co.ke/rss/evewoman.php",
