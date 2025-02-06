@@ -34,9 +34,6 @@ function App() {
     trackScrollDepth();
   }, []);
   
-  useEffect(() => {
-    document.title = "Gazeti News";
-  }, []);
 
   return (
     <RefineKbarProvider>
@@ -80,8 +77,8 @@ function App() {
             </Routes>
 
             <RefineKbar />
-            <UnsavedChangesNotifier />
-            <DocumentTitleHandler />
+            {/* <UnsavedChangesNotifier /> */}
+            {/* <DocumentTitleHandler /> */}
           </Refine>
           {/* <DevtoolsPanel /> */}
           {/* </DevtoolsProvider> */}
